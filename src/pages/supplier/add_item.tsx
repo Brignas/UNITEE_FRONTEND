@@ -1,11 +1,10 @@
 import './add_item.css'
 import product from "../../assets/images/shop_products/product.png"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import logo from "../../assets/images/unitee.png"
 import { useEffect  } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-
 
 
 function Add_item(){
@@ -19,6 +18,8 @@ function Add_item(){
     const [productQuantity, setproductQuantity] = useState('');
     const [departments, setDepartments] = useState([]);
     const [departmentID, setSelectedDepartments] = useState('');
+    const { User_ID } = useParams();
+    const navigate = useNavigate();
 
     const handleGenderChange = (e) => {
         setproductGender(e.target.value);
@@ -39,7 +40,8 @@ function Add_item(){
 
         const handleAddItem = () => {
             const data = {
-                // Size_ID : productSize
+                User_ID : User_ID
+                , // Size_ID : productSize,
                 Department_ID : departmentID
                 , Product_Name : productName
                 , Product_Description : productDescription
@@ -61,7 +63,7 @@ function Add_item(){
 
     return <div className="container add_item_container">
         <header style={{ marginTop:'30px', display:'flex', alignItems:'center', gap:'45em' }}>
-        <Link to='/supplier_items' style={{ textDecoration:'none' }}>
+        <Link to={`/supplier_items/${User_ID}`} style={{ textDecoration:'none' }}>
                 <span className="back_btn">Back</span>
             </Link>
 
@@ -186,7 +188,7 @@ function Add_item(){
 
             <div className="item-btns-container">
             <button type="button" className="btn btn-lg btn-success" onClick={handleAddItem}>Add Item</button>
-            <button type="button" className="btn btn-lg btn-danger">Cancel</button>
+            <button type="button" className="btn btn-lg btn-danger" onClick={() => navigate(`/supplier_items/${User_ID}`)}>Cancel</button>
             </div>
 
         </div>

@@ -31,12 +31,12 @@ function Login() {
               alert(result.data.message);
               switch(result.data.role) {
                 case 'user':
-                    alert('USERRR');
-                  navigate('/main', { state: { userData: result.data } });
+                    alert('USER');
+                  navigate(`/main/${result.data.id}`, { state: { userData: result.data } });
                   break;
                 case 'supplier':
-                    alert('SUPPLIERRRR');
-                  navigate('/supplier_items', { state: { supplierData: result.data } });
+                    alert('SUPPLIER');
+                  navigate(`/supplier_items/${result.data.id}`, { state: { supplierData: result.data } });
                   break;
                 case 'admin':
                   alert('ADMIN');

@@ -32,3 +32,15 @@
     color: black;
     font-size: medium;
 }
+
+.shop-test{
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shop-test .col-md-3{
+    flex-grow: 2;
+    width: 33%;
+    margin-top: 20px;
+}

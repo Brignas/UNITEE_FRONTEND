@@ -1,4 +1,4 @@
-import { Outlet } from "react-router"
+import { Outlet, useParams } from "react-router"
 import { Link } from "react-router-dom"
 import './main.css'
 import logo from "../../assets/images/unitee.png"
@@ -9,6 +9,9 @@ import profile from "../../assets/images/icons/profile.png"
 import logout from "../../assets/images/icons/logout.png"
 
 function Main() {
+
+    const { id } = useParams();
+
     return <div className="main">
         <div className="container">
             <header className="header row">

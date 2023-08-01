@@ -1,7 +1,24 @@
 import './shop.css'
-import product from "../../assets/images/shop_products/product.png"
+import productImage from "../../assets/images/shop_products/product.png"
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 
 function Shop() {
+    const [products, setProducts] = useState([]);
+
+    // READ ALL PRODUCTS
+    useEffect(() => {
+        axios.post('https://localhost:44374/api/product/Products')
+        .then((response) => {
+            setProducts(response.data); 
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        }, []);
+
+    
     return <div className='container shop-contianer'>
     <div className='col content-container'>
     <div className='row g-3' style={{ justifyContent: 'center' }}>
@@ -56,100 +73,22 @@ function Shop() {
                 </div>                
             </div>
             
-            <div className='col-md-12 product-container'>
-                <div className='col-md-3'>
+            
+            <div className='col-md-12 product-container shop-test' style={{width:'815px'}}>
+                {products.map((product) =>(
+                    <div className='col-md-3'>
                     <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
+                        <img src={ productImage }/>
                         <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
+                            <h5 className="card-title">{product.Product_Name}</h5>
+                            <p className="card-text">${product.Product_Price}</p>
                         </div>
                     </div>
                 </div>
+                ))}
 
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
         </div>
-        <div className='col-md-12 product-container'>
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-        <div className='col-md-12 product-container'>
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-md-3'>
-                    <div className="card" style={{width:'230px'}}>
-                        <img src={ product }/>
-                        <div className="card-body">
-                            <h5 className="card-title">Product Name</h5>
-                            <p className="card-text">$999.00</p>
-                        </div>
-                    </div>
-                </div>
-        </div>                      
+                     
         </div>
         
             

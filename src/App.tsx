@@ -16,14 +16,14 @@ function App() {
       <Routes>
         <Route index element={ <Login/> }/>
         <Route path='/register' element={ <Register/> }/>
-        <Route path='/main' element={ <Main/> }>
+        <Route path='/main/:User_ID' element={ <Main/> }>
           <Route index element={ <Home/> }/>
           <Route path='shop' element={ <Shop/> }/>
-          <Route path='/main' element={ <Main/> }></Route>  
+          <Route path='/main/:User_ID' element={ <Main/> }></Route>  
         </Route>
-        <Route path='/supplier_items' element={ <Supplier/> }></Route>
-        <Route path='/add_item' element={ <Add_item/> }></Route>
-        <Route path='/update_item' element={ <Update_item/> }></Route>  
+        <Route path='/supplier_items/:User_ID' element={ <Supplier/> }></Route>
+        <Route path='/add_item/:User_ID' element={ <Add_item/> }></Route>
+        <Route path='/update_item/:User_ID/:Product_ID' element={ <Update_item/> }></Route>  
         <Route path='*' element={ <NotFound/> }/>
       </Routes>
     </Router>

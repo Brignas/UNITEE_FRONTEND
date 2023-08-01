@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import product from "../../assets/images/shop_products/product.png";
 import logo from "../../assets/images/unitee.png";
 import { useEffect, useState  } from 'react';
@@ -11,7 +11,8 @@ function Update_item() {
     const [productQuantity, setProductQuantity] = useState('');
     const [departments, setDepartments] = useState([]);
     const [departmentID, setSelectedDepartments] = useState('');
-    const { id } = useParams();
+    const { Product_ID, User_ID } = useParams();
+    const navigate = useNavigate();
 
     // READ ALL DEPARTMENTS
     useEffect(() => {
@@ -26,6 +27,7 @@ function Update_item() {
 
     const handleUpdateItem = () => {
         const data = {
+            Product_ID : Product_ID,
             Department_ID : departmentID,
             Product_Name : productName,
             Product_Description : productDescription,
@@ -37,6 +39,7 @@ function Update_item() {
         axios.post(url, data)
         .then((response) => {
             console.log(response.data);
+            navigate(`/supplier_items/${User_ID}`);
         })
         .catch((error) => {
             console.log(error);
@@ -45,8 +48,9 @@ function Update_item() {
 
     // READ ALL PRODUCTS
     useEffect(() => {
-        axios.post('https://localhost:44374/api/product/Products/${id}')
+        axios.get(`https://localhost:44374/api/product/Products/${Product_ID}`)
         .then((response) => {
+           
             const product = response.data;
             setProductName(product.Product_Name);
             setProductDescription(product.Product_Description);
@@ -57,12 +61,12 @@ function Update_item() {
         .catch((error) => {
             console.log(error);
         });
-    }, [id]);
+    }, [Product_ID]);
 
     return (
         <div className="container add_item_container">
             <header style={{ marginTop:'30px', display:'flex', alignItems:'center', gap:'45em' }}>
-                <Link to='/supplier_items' style={{ textDecoration:'none' }}>
+                <Link to={`/supplier_items/${User_ID}`} style={{ textDecoration:'none' }}>
                         <span className="back_btn">Back</span>
                 </Link>
                 <img className="logo" src={ logo }/>

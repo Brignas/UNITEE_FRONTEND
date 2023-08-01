@@ -1,5 +1,5 @@
 import './supplier_items.css'
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import logo from '../../assets/images/unitee.png'
 import sprofile from '../../assets/images/s-icon.png'
 import logoutSupplier from "../../assets/images/icons/logoutSupplier.png"
@@ -7,15 +7,14 @@ import items from "../../assets/images/icons/items.png"
 import orders from "../../assets/images/icons/orders.png"
 import reports from "../../assets/images/icons/reports.png"
 import featured_item from '../../assets/images/main/home_1.png'
-import product from "../../assets/images/shop_products/product.png"
-import React, { useState, useEffect } from 'react'
+import productImage from "../../assets/images/shop_products/product.png"
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function Supplier (){
-    const [productGender, setproductGender] = useState('');
     const [departments, setDepartments] = useState([]);
-    const [product, setProduct] = useState('');
     const [products, setProducts] = useState([]);
+    const { User_ID } = useParams();
     
 
     // READ ALL DEPARTMENTS
@@ -141,7 +140,7 @@ function Supplier (){
                 
                 <div className='col-md-12' style={{ marginTop:'50px',justifyContent:'center',display:'flex',alignItems:'center'}}>
                     <div>
-                      <Link to='/add_item'>
+                      <Link to={`/add_item/${User_ID}`}>
                         <button className="add-item-btn">Add Item</button>
                       </Link>
                     </div>
@@ -153,11 +152,11 @@ function Supplier (){
 
 
                 {products.map((product, index) => (
-    <Link to={`/update_item/${product.Product_ID}`} style={{ display:'flex', justifyContent:'center', textDecoration:'none' }} key={index}>
+    <Link to={`/update_item/${User_ID}/${product.Product_ID}`} style={{ display:'flex', justifyContent:'center', textDecoration:'none' }} key={index}>
         <div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={ product.Product_Image } className="img-fluid rounded-start" alt={product.Product_Name}/>
+                    <img src={ productImage } className="img-fluid rounded-start" alt={product.Product_Name}/>
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
