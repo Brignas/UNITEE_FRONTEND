@@ -1,0 +1,38 @@
+.main {
+    /* background-image: url('../assets/images/common/login_bg.png'); */
+    background: linear-gradient(#00215E, #2668E1);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.main-container {
+    margin: auto !important;
+    min-height: 100vh;
+}
+
+.content-container {
+    display: flex; 
+    flex-flow: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.login-container {
+    width: 266px;
+    gap: 15px;
+}
+
+.side-container {
+    justify-content: center;
+    gap: 15px;
+}
+
+
+.header-title {
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}

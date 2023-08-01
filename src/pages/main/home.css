@@ -1,0 +1,21 @@
+.home-container {
+    display: flex;
+    flex-flow: column;
+    gap: 36px;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.display-img {
+    width: 833px;
+    height: 470px;
+}
+.goto-shop-container {
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}

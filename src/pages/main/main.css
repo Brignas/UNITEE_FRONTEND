@@ -1,0 +1,44 @@
+.header, .footer {
+    padding: 15px 0px 15px 0px;
+}
+
+.header-button-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: end;
+}
+
+.header-img-button {
+    height: 23px;
+    width: 23px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.footer-info {
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
+}
+
+.footer-terms-privacy {
+    display: flex;
+    gap: 10px;
+}
+
+.footer{
+    background-color: #457497;
+    position:static;
+    bottom: 0;
+    width: 100vw;
+    text-align: center;
+}
+
+.footer, .img{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
