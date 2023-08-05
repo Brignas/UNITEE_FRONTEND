@@ -54,6 +54,8 @@ function Add_item(){
             axios.post(url, data)
             .then((response) => {
                 console.log(response.data);
+                alert("Successfully Added");
+                navigate(`/supplier_items/${User_ID}`);
             })
             .catch((error) => {
                 console.log(error);

@@ -12,6 +12,7 @@ function Update_item() {
     const [departments, setDepartments] = useState([]);
     const [departmentID, setSelectedDepartments] = useState('');
     const { Product_ID, User_ID } = useParams();
+    const [productIsActive, setproductIsActive] = useState('');
     const navigate = useNavigate();
 
     // READ ALL DEPARTMENTS
@@ -25,6 +26,7 @@ function Update_item() {
         });
     }, []);
 
+    //Button Update
     const handleUpdateItem = () => {
         const data = {
             Product_ID : Product_ID,
@@ -38,7 +40,7 @@ function Update_item() {
         const url = 'https://localhost:44374/api/product/UpdateProduct';
         axios.post(url, data)
         .then((response) => {
-            console.log(response.data);
+            alert(response.data);
             navigate(`/supplier_items/${User_ID}`);
         })
         .catch((error) => {
@@ -46,7 +48,7 @@ function Update_item() {
         });
     };
 
-    // READ ALL PRODUCTS
+    // READ PRODUCT BY ID
     useEffect(() => {
         axios.get(`https://localhost:44374/api/product/Products/${Product_ID}`)
         .then((response) => {
@@ -57,11 +59,42 @@ function Update_item() {
             setProductPrice(product.Product_Price);
             setProductQuantity(product.Product_Quantity);
             setSelectedDepartments(product.Department_ID);
+            if(product.Product_IsActive === true)
+            {
+                const Deactivate = document.getElementById("btn_Deactivate");
+                Deactivate.style.color = "white";
+                Deactivate.style.borderColor = "red";
+                Deactivate.style.backgroundColor = "red";
+                Deactivate.textContent="Deactivate";
+                setproductIsActive('false');
+            }
+            else if(product.Product_IsActive === false)
+            {
+                const Deactivate = document.getElementById("btn_Deactivate");
+                Deactivate.textContent="Activate";
+                Deactivate.style.color = "white";
+                Deactivate.style.borderColor = "green";
+                Deactivate.style.backgroundColor = "green";
+                setproductIsActive('true');
+            }
         })
         .catch((error) => {
             console.log(error);
         });
     }, [Product_ID]);
+
+    const btnActivateDeactivate = () => {
+        const data = {
+            Product_ID : Product_ID,
+            Product_IsActive : productIsActive
+        }
+
+        const url = 'https://localhost:44374/api/product/UpdateStatus';
+        axios.post(url, data).then((result) =>{
+            console.log("Successfully Updated the status");
+            navigate(`/supplier_items/${User_ID}`);
+        })
+    }
 
     return (
         <div className="container add_item_container">
@@ -132,7 +165,7 @@ function Update_item() {
                         >
                             Update Item
                         </button>
-                        <button type="button" className="btn btn-lg btn-danger">Deactivate</button>
+                        <button type="button" className="btn btn-lg btn-danger" id='btn_Deactivate' onClick={btnActivateDeactivate}></button>
                     </div>
                 </div>
             </div>
